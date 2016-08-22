@@ -4,7 +4,7 @@ This is a scrapy project to crawl the data from http://weather.sina.com.cn/.
 
 ### Directory Structure
 
-![icon](figure1.png)
+![icon](http://obw22u9v2.bkt.clouddn.com/figure1.png)
 
 ### File Contents
 

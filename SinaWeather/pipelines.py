@@ -12,7 +12,7 @@ class SinaweatherPipeline(object):
 
     def process_item(self, item, spider):
         with open('weather.txt', 'w+') as file:
-            city = item['city'][0].encode('utf-8')
+            city = item['city'].encode('utf-8')
             file.write('city:{0}\n\n'.format(str(city)))
 
             date = item['date']
@@ -29,14 +29,21 @@ class SinaweatherPipeline(object):
 
             for i in xrange(len(weatherItem)):
                 item = weatherItem[i]
-                ta = item[3].split('/')
-                text = 'date:{0}\t\t day:{1}({2})\t\tnight:{3}({4})\n\n'.format(
-                    item[0],
-                    item[1].encode('utf-8'),
-                    ta[0].encode('utf-8'),
-                    item[2].encode('utf-8'),
-                    ta[1].encode('utf-8')
-                )
+                if item[3].find('/') != -1:  # 白天运行爬虫
+                    ta = item[3].split('/')
+                    text = 'date:{0}\t\t day:{1}({2})\t\tnight:{3}({4})\n\n'.format(
+                        item[0],
+                        item[1].encode('utf-8'),
+                        ta[0].encode('utf-8'),
+                        item[2].encode('utf-8'),
+                        ta[1].encode('utf-8')
+                    )
+                else:  # 晚上运行爬虫时只有晚上的数据
+                    text = 'date:{0}\t\t night:{1}({2})\n\n'.format(
+                        item[0],
+                        item[2].encode('utf-8'),
+                        item[3].encode('utf-8')
+                    )
                 file.write(text)
 
         return item
