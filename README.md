@@ -15,6 +15,14 @@ This is a scrapy project to crawl the data from http://weather.sina.com.cn/.
 * *SinaWeather/settings.py*: 项目的设置文件
 * *SinaWeather/spiders/*: 放置spiders的目录
 
+### Operating method
+
+```
+scrapy crawl SinaWeather
+```
+
+Then the crawl result will be shown in wea.txt.
+
 ### Reference
 
 * [实验楼](https://www.shiyanlou.com/courses/142/labs/433/document)
